@@ -63,3 +63,11 @@ COPY --from=builder /usr/src/app/share/VERSION VERSION
 COPY ${WORKSPACE} /host
 
 WORKDIR /host/node
+
+COPY pf-demo/build-pyscitt-venv.sh /tmp/build-pyscitt-venv.sh
+COPY pyscitt /tmp/pyscitt
+RUN tdnf install -y python3-pip
+RUN cd / && bash /tmp/build-pyscitt-venv.sh
+RUN rm -rf /tmp/build-pyscitt-venv.sh /tmp/pyscitt
+
+COPY pf-demo/demo.sh /host/demo.sh
