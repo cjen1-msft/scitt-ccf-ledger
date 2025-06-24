@@ -16,22 +16,18 @@ This demo provides a generic Proof of Concept for a Code Transparency Service (C
 
 ## Instructions
 
-All the commands must be run from the root of the repository.
-
 ### CTS Operator
 
 1. Start the instance with a single admin (member):
 
-    ```bash
-    export PLATFORM=virtual
-    ./build.sh
-    ./start.sh
+    ``` 
+    UVM_SECURITY_CONTEXT_DIR=/security-context-... cchost --config /host/dev-config.json --enclave-file /usr/src/app/libscitt.snp.so
     ```
 
-    Alternatively, set the `SCITT_URL` variable if you are targeting a remote instance already deployed and publicly accessible:
+    Set the `SCITT_URL` variable if you are targeting a remote instance already deployed and publicly accessible:
 
     ```
-    export SCITT_URL=<address>
+    export SCITT_URL=127.0.0.1:8000
     ```
 
     If the `SCITT_URL` variable is not set, the scripts will target a local instance by default (`https://localhost:8000`).
@@ -39,7 +35,7 @@ All the commands must be run from the root of the repository.
 2. Run the [`1-operator-demo.sh`](1-operator-demo.sh) to configure the instance.
 
     ```bash
-    MEMBER_CERT_PATH="workspace/member0_cert.pem" MEMBER_KEY_PATH="workspace/member0_privk.pem" SCITT_CONFIG_PATH="demo-poc/x509_roots/configuration.json" ./demo/cts_poc/1-operator-demo.sh
+   MEMBER_CERT_PATH="/host/member0_cert.pem" MEMBER_KEY_PATH="/host/member0_privk.pem" SCITT_CONFIG_PATH="/demo/x509_roots/configuration.json" /demo/1-operator-demo.sh
     ```
 
 ### CTS client
@@ -49,7 +45,7 @@ All the commands must be run from the root of the repository.
 You need to have a file to sign. There is a limit on the size of the payload (1MB) so it needs to be reasonably small.
 
 ```bash
-echo '{"content":"some demo text"}' > demo-poc/payload.json
+echo '{"content":"some demo text"}' > /demo/payload.json
 ```
 
 #### Sign the payload
@@ -57,8 +53,8 @@ echo '{"content":"some demo text"}' > demo-poc/payload.json
 If you created your own certificate and key combination as mentioned in the prerequisites then the following command will create a signature.
 
 ```bash
-ISSUER=$(cat demo-poc/x509_roots/issuer.txt)
-CACERT_PATH="demo-poc/x509_roots/cacert.pem" PRIVATE_KEY_PATH="demo-poc/x509_roots/cacert_privk.pem" CLAIM_CONTENT_PATH="demo-poc/payload.json" COSE_CLAIMS_OUTPUT_PATH="demo-poc/payload.sig.cose" DID_X509_ISSUER="$ISSUER" ./demo/cts_poc/2-claim-generator.sh
+ISSUER=$(cat /demo/x509_roots/issuer.txt)
+CACERT_PATH="/demo/x509_roots/cacert.pem" PRIVATE_KEY_PATH="/demo/x509_roots/cacert_privk.pem" CLAIM_CONTENT_PATH="/demo/payload.json" COSE_CLAIMS_OUTPUT_PATH="/demo/payload.sig.cose" DID_X509_ISSUER="$ISSUER" /demo/2-claim-generator.sh
 ```
 
 #### Submit the COSE_Sign1 claim file
@@ -68,7 +64,7 @@ Submit the COSE claim to the SCITT ledger and verify a receipt for the committed
 The script will submit the COSE claim to the SCITT ledger and will wait for a receipt to be generated. Once the receipt is generated, the script will print the CBOR receipt in a readable format, and verify the receipt validity.
 
 ```bash
-COSE_CLAIMS_PATH="demo-poc/payload.sig.cose" OUTPUT_FOLDER="demo-poc" ./demo/cts_poc/3-client-demo.sh
+COSE_CLAIMS_PATH="/demo/payload.sig.cose" OUTPUT_FOLDER="/demo" /demo/3-client-demo.sh
 ```
 
 #### Known Issues and Workaround for Local Virtual Build

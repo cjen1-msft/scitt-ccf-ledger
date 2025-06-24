@@ -42,7 +42,8 @@ RUN tdnf install -y \
     ca-certificates-1:3.0.0-8.azl3 \
     tini-0.19.0-19.azl3 \
     tar-1.35-1.azl3 \
-    nmap-ncat-7.95-2.azl3 && \
+    nmap-ncat-7.95-2.azl3 
+    awk jq && \
     \
     # Use the CCF runtime package which contains the minimal dependencies for running CCF applications
     curl -L "https://github.com/microsoft/CCF/releases/download/ccf-${CCF_VERSION}/ccf_${CCF_PLATFORM}_${CCF_VERSION//-/_}_x86_64.rpm" -o ccf.rpm && \
@@ -70,7 +71,5 @@ COPY pf-demo/build-pyscitt-venv.sh /tmp/build-pyscitt-venv.sh
 COPY pyscitt /tmp/pyscitt
 COPY demo/cts_poc /demo
 RUN cd / && bash /tmp/build-pyscitt-venv.sh
-RUN rm -rf /tmp/build-pyscitt-venv.sh /tmp/pyscitt
-
 
 COPY pf-demo/demo.sh /host/demo.sh
