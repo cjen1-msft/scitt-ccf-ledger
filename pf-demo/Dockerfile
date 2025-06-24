@@ -42,7 +42,7 @@ RUN tdnf install -y \
     ca-certificates-1:3.0.0-8.azl3 \
     tini-0.19.0-19.azl3 \
     tar-1.35-1.azl3 \
-    nmap-ncat-7.95-2.azl3 
+    nmap-ncat-7.95-2.azl3 \
     awk jq && \
     \
     # Use the CCF runtime package which contains the minimal dependencies for running CCF applications
