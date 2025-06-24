@@ -20,17 +20,12 @@ This demo provides a generic Proof of Concept for a Code Transparency Service (C
 
 1. Start the instance with a single admin (member):
 
+    Either `source /aci-env` or `export UVM_SECURITY_CONTEXT_DIR=/security-context-...`
     ``` 
     UVM_SECURITY_CONTEXT_DIR=$UVM_SECURITY_CONTEXT_DIR cchost --config /host/dev-config.json --enclave-file /usr/src/app/libscitt.snp.so
     ```
 
-    Set the `SCITT_URL` variable if you are targeting a remote instance already deployed and publicly accessible:
-
-    ```
-    export SCITT_URL=127.0.0.1:8000
-    ```
-
-    If the `SCITT_URL` variable is not set, the scripts will target a local instance by default (`https://localhost:8000`).
+    The scripts will target a local instance by default (`https://localhost:8000`), however this can be set via the `SCITT_URL` environment variable
 
 2. Run the [`1-operator-demo.sh`](1-operator-demo.sh) to configure the instance.
 
