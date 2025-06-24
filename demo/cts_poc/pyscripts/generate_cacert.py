@@ -8,7 +8,7 @@ from cryptography import x509
 from cryptography.hazmat.primitives import serialization
 from loguru import logger
 
-from .x5chain_certificate_authority import X5ChainCertificateAuthority
+from x5chain_certificate_authority import X5ChainCertificateAuthority
 
 
 def generate_ca_cert_and_key(

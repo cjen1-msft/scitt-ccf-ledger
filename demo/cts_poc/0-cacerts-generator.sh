@@ -21,7 +21,7 @@ source /venv/bin/activate
 
 cd /demo
 echo -e "\nCreating CA certificate and key";
-python3.12 -m pyscripts/generate_cacert.py --output-dir "$CACERT_OUTPUT_DIR" --eku "$CUSTOM_EKU";
+python3.12 pyscripts/generate_cacert.py --output-dir "$CACERT_OUTPUT_DIR" --eku "$CUSTOM_EKU";
 
 echo -e "\nCreating instance configuration file";
 cp "$CURRENT_DIR/configuration.tmpl.json" "$CACERT_OUTPUT_DIR/configuration.json";
