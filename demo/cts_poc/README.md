@@ -21,7 +21,7 @@ This demo provides a generic Proof of Concept for a Code Transparency Service (C
 1. Start the instance with a single admin (member):
 
     ``` 
-    UVM_SECURITY_CONTEXT_DIR=/security-context-... cchost --config /host/dev-config.json --enclave-file /usr/src/app/libscitt.snp.so
+    UVM_SECURITY_CONTEXT_DIR=$UVM_SECURITY_CONTEXT_DIR cchost --config /host/dev-config.json --enclave-file /usr/src/app/libscitt.snp.so
     ```
 
     Set the `SCITT_URL` variable if you are targeting a remote instance already deployed and publicly accessible:
