@@ -1,0 +1,3 @@
+ccf==6.*
+cryptography==44.*
+loguru

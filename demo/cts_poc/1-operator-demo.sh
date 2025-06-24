@@ -14,13 +14,11 @@ set -euo pipefail
 SCITT_URL=${SCITT_URL:-"https://127.0.0.1:8000"}
 
 echo -e "\nSetting up environment"
-if [ ! -f "venv/bin/activate" ]; then
-    python3.12 -m venv "venv"
+if [ ! -f "/venv/bin/activate" ]; then
+    echo "No venv found at /venv/bin/activate"
+    exit 1
 fi
-
-# Activate environment and install pyscitt local library
-source venv/bin/activate
-pip install --disable-pip-version-check -q -e ./pyscitt
+source /venv/bin/activate
 
 echo -e "\nActivating member"
 

@@ -21,13 +21,11 @@ if [[ ! "$DID_X509_ISSUER" =~ ^did:x509:.* ]]; then
 fi
 
 echo -e "\nSetting up environment"
-if [ ! -f "venv/bin/activate" ]; then
-    python3.12 -m venv "venv"
+if [ ! -f "/venv/bin/activate" ]; then
+    echo "No venv found at /venv/bin/activate"
+    exit 1
 fi
-
-# Activate environment and install pyscitt local library
-source venv/bin/activate
-pip install --disable-pip-version-check -q -e ./pyscitt
+source /venv/bin/activate
 
 # Create and sign claim with the provided content
 echo -e "\nCreating and signing claim"

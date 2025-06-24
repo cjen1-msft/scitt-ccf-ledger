@@ -17,3 +17,4 @@ fi
 
 source venv/bin/activate 
 pip install --disable-pip-version-check -q -e /tmp/pyscitt
+pip install --disable-pip-version-check -q -r /demo/pyscripts/requirements.txt

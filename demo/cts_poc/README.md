@@ -7,8 +7,8 @@ This demo provides a generic Proof of Concept for a Code Transparency Service (C
 - The ledger expects payloads to be signed into COSE_Sign1 signature envelopes, also called signed statements. You can set up custom [X509 signing cert](../../docs/configuration.md#x509-roots) locally via the script `0-cacerts-generator.sh`:
 
     ```bash
-    mkdir -p demo-poc/x509_roots
-    CACERT_OUTPUT_DIR="demo-poc/x509_roots" ./demo/cts_poc/0-cacerts-generator.sh
+    mkdir -p /demo/x509_roots
+    CACERT_OUTPUT_DIR="/demo/x509_roots" /demo/0-cacerts-generator.sh
     ```
 - `0-cacerts-generator.sh` will also setup the configuration file (see [documentation](../../docs/configuration.md#scitt-configuration)).
 

@@ -1,4 +1,4 @@
-ARG CCF_VERSION="6.0.1"
+ARG CCF_VERSION="6.0.5"
 
 # Use fixed image version to ensure reproducibility
 ARG BASE_IMAGE=mcr.microsoft.com/azurelinux/base/core:3.0.20250402
@@ -64,10 +64,13 @@ COPY ${WORKSPACE} /host
 
 WORKDIR /host/node
 
+RUN tdnf install -y python3-pip
+
 COPY pf-demo/build-pyscitt-venv.sh /tmp/build-pyscitt-venv.sh
 COPY pyscitt /tmp/pyscitt
-RUN tdnf install -y python3-pip
+COPY demo/cts_poc /demo
 RUN cd / && bash /tmp/build-pyscitt-venv.sh
 RUN rm -rf /tmp/build-pyscitt-venv.sh /tmp/pyscitt
+
 
 COPY pf-demo/demo.sh /host/demo.sh

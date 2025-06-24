@@ -13,17 +13,15 @@ CURRENT_DIR=$(dirname "$0")
 CUSTOM_EKU="1.3.6.1.5.5.7.3.36"
 
 echo -e "\nSetting up environment"
-if [ ! -f "venv/bin/activate" ]; then
-    python3.12 -m venv "venv"
+if [ ! -f "/venv/bin/activate" ]; then
+    echo "No venv found at /venv/bin/activate"
+    exit 1
 fi
+source /venv/bin/activate
 
-# Activate environment and install pyscitt local library and test dependencies
-source venv/bin/activate
-pip install --disable-pip-version-check -q -e ./pyscitt
-pip install --disable-pip-version-check -q -r test/requirements.txt
-
+cd /demo
 echo -e "\nCreating CA certificate and key";
-python3.12 -m test.infra.generate_cacert --output-dir "$CACERT_OUTPUT_DIR" --eku "$CUSTOM_EKU";
+python3.12 -m pyscripts/generate_cacert.py --output-dir "$CACERT_OUTPUT_DIR" --eku "$CUSTOM_EKU";
 
 echo -e "\nCreating instance configuration file";
 cp "$CURRENT_DIR/configuration.tmpl.json" "$CACERT_OUTPUT_DIR/configuration.json";
